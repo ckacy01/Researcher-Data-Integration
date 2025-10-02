@@ -1,9 +1,13 @@
 package org.technoready.researcherdataintegration.models;
 
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Interest {
     private String title;
     private String link;

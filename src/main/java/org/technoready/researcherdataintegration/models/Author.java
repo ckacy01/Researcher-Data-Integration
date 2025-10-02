@@ -2,9 +2,13 @@ package org.technoready.researcherdataintegration.models;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Author {
     private String name;
     private String affiliations;
