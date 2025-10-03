@@ -23,7 +23,7 @@ public class Error {
         this.code = code;
         this.message = message;
         this.error = error;
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
         this.path = path;
     }
 
