@@ -18,7 +18,7 @@ public class AuthorService {
     private final ScholarApiConfiguration config;
 
     public Author getAuthor(String authorId) {
-        String url = String.format("https://serpapi.com/search?engine=google_scholar_author&author_id=%s&api_key=%s",
+        String url = String.format( config.getBaseUrl() + "?engine=google_scholar_author&author_id=%s&api_key=%s",
                 authorId, config.getApiKey());
         log.info("Getting author with id {}", authorId);
         AuthorSearchResponse response = restTemplate.getForObject(url, AuthorSearchResponse.class);
