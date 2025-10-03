@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@Builder
 public class Error {
     private int code;
     private String message;
