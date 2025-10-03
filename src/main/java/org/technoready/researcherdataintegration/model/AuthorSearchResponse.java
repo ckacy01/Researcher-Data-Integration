@@ -13,7 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorSearchResponse {
-
-    @JsonProperty("profiles")
-    private List<Author> profiles;
+    private Author author;
 }
