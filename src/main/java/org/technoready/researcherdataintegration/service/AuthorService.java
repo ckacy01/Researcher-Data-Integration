@@ -24,8 +24,9 @@ public class AuthorService {
 
     public Author getAuthor(String authorId) {
         validateApiKey();
-        String url = String.format( config.getBaseUrl() + "?engine=google_scholar_author&author_id=%s&api_key=%s",
-                authorId, config.getApiKey());
+        String url = String.format( config.getBaseUrl() +
+                        "?engine=google_scholar_author&author_id=%s&api_key=%s",
+                        authorId, config.getApiKey());
 
         try{
             log.info("Getting author with id {}", authorId);

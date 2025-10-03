@@ -19,8 +19,8 @@ public class GlobalExceptionHandler {
 
         log.error("AuthorNotFoundException: Author Not Found", ex);
 
-        Error error = Error.builder()
-                .code(HttpStatus.NOT_FOUND.value())
+        Error error = Error
+                .builder().code(HttpStatus.NOT_FOUND.value())
                 .message("Author Not Found")
                 .error(ex.getMessage())
                 .path(request.getDescription(false).replace("uri=", ""))
