@@ -1,4 +1,4 @@
-package org.technoready.researcherdataintegration.models;
+package org.technoready.researcherdataintegration.model;
 
 
 import lombok.AllArgsConstructor;
