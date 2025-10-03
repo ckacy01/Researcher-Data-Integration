@@ -43,9 +43,6 @@ public class AuthorService {
             throw new ExternalApiException("Error consulting SerpAPI");
         }catch(HttpServerErrorException e){
             throw new ExternalApiException("Error consulting SerpAPI");
-        }catch (Exception e){
-            e.printStackTrace();
-            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
