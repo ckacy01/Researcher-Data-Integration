@@ -1,0 +1,6 @@
+org.technoready.researcherdataintegration
+org.technoready.researcherdataintegration.config
+org.technoready.researcherdataintegration.controller
+org.technoready.researcherdataintegration.exception
+org.technoready.researcherdataintegration.model
+org.technoready.researcherdataintegration.service
