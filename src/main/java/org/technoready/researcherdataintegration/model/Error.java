@@ -1,11 +1,22 @@
 package org.technoready.researcherdataintegration.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+
+/**
+ * Model representing a standardized error response structure for the API.
+ * This object is used in exception handlers to return consistent and informative error messages to clients.
+ * DATE: 04 - October - 2025
+ *
+ * Fields include HTTP status code, message, detailed error description, timestamp, and request path.
+ *
+ *
+ * @author Jorge Armando Avila Carrillo | NAOID: 3310
+ * @version 1.0
+ */
 
 @Data
 @NoArgsConstructor
