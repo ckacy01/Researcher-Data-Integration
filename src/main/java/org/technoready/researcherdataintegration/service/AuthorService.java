@@ -2,7 +2,6 @@ package org.technoready.researcherdataintegration.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -11,8 +10,8 @@ import org.technoready.researcherdataintegration.config.ScholarApiConfiguration;
 import org.technoready.researcherdataintegration.exception.ApiKeyException;
 import org.technoready.researcherdataintegration.exception.AuthorNotFoundException;
 import org.technoready.researcherdataintegration.exception.ExternalApiException;
-import org.technoready.researcherdataintegration.model.Author;
-import org.technoready.researcherdataintegration.model.AuthorSearchResponse;
+import org.technoready.researcherdataintegration.entity.Author;
+import org.technoready.researcherdataintegration.entity.AuthorSearchResponse;
 
 /**
  * Service class responsible for retrieving author data from an external API (e.g., SerpAPI).
