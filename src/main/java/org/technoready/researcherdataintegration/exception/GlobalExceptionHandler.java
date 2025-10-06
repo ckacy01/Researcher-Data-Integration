@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
-import org.technoready.researcherdataintegration.model.Error;
+import org.technoready.researcherdataintegration.entity.Error;
 
 /**
  * Global exception handler for the Researcher Data Integration API.

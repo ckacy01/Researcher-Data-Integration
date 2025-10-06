@@ -1,12 +1,10 @@
-package org.technoready.researcherdataintegration.model;
+package org.technoready.researcherdataintegration.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 /**
  * Model representing the response structure from the external API when searching for an author.
  * Typically used to deserialize the JSON response where the root object contains an "author" field.
