@@ -3,5 +3,18 @@ server.port=8080
 spring.application.name=Researcher-Data-Integration
 
 # SerpAPI configuration
-cholar.api.base-url=https://serpapi.com/search
-scholar.api.key=${HERE_API_KEY}
+scholar.api.base-url=https://serpapi.com/search.json
+scholar.api.api-key=
+
+# Database info
+spring.datasource.url=jdbc:postgresql://localhost:5432/GoogleSearch
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Hibernate/JPA
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
