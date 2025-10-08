@@ -10,6 +10,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.technoready.researcherdataintegration.entity.Error;
 
+import java.time.LocalDateTime;
+
 /**
  * Global exception handler for the Researcher Data Integration API.
  * Catches and processes exceptions across the application to return standardized error responses.
@@ -117,6 +119,40 @@ public class GlobalExceptionHandler {
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handles a database error
+     */
+    @ExceptionHandler(value = DatabaseException.class)
+    public ResponseEntity<Error> handleDatabaseException(DatabaseException ex, WebRequest request) {
+        log.error("DatabaseException: {}", ex.getMessage(), ex);
+
+        Error error = Error.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .error("Database Error")
+                .message(ex.getMessage())
+                .path(request.getDescription(false).replace("uri=", ""))
+                .build();
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handles a validation error
+     */
+    @ExceptionHandler(value = ValidationException.class)
+    public ResponseEntity<Error> handleValidationException(ValidationException ex, WebRequest request) {
+        log.error("ValidationException: {}", ex.getMessage(), ex);
+        Error error = Error.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .error("Validation Error")
+                .message(ex.getMessage())
+                .path(request.getDescription(false).replace("uri=", ""))
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
 
