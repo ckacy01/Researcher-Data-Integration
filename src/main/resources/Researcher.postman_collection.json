@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "7e6e74e5-71a6-490d-a3d2-f6f08dab4c40",
+		"name": "Researcher - by Ckacy01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48891527",
+		"_collection_link": "https://ckacy01-5557687.postman.co/workspace/Jorge-A.'s-Workspace~ac5f52fa-1f1b-4207-80c9-c83de0d116e4/collection/48891527-7e6e74e5-71a6-490d-a3d2-f6f08dab4c40?action=share&source=collection_link&creator=48891527"
+	},
+	"item": [
+		{
+			"name": "Get Author by Id (Ex. Richard Feyman)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Articles from DB",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Import articles into DB",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n      \"researchers\": [\"Rodolfo Ostos\", \"Luis Mena Camare\"],\n      \"articlesPerResearcher\": 3\n     }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/article/import",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article",
+						"import"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
