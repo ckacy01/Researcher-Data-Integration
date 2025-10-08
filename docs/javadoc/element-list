@@ -1,6 +1,8 @@
 org.technoready.researcherdataintegration
 org.technoready.researcherdataintegration.config
 org.technoready.researcherdataintegration.controller
-org.technoready.researcherdataintegration.exception
+org.technoready.researcherdataintegration.dto
 org.technoready.researcherdataintegration.entity
+org.technoready.researcherdataintegration.exception
+org.technoready.researcherdataintegration.repository
 org.technoready.researcherdataintegration.service

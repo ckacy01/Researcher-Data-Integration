@@ -12,6 +12,20 @@ import org.technoready.researcherdataintegration.service.ArticleService;
 
 import java.util.List;
 
+/**
+ * REST Controller responsible for managing article-related operations.
+ * Provides endpoints for retrieving stored articles and importing new articles from researchers.
+ * DATE: 08 - October - 2025
+ *
+ * This controller exposes two main endpoints:
+ * - GET /api/article/articles: Retrieves all articles stored in the database
+ * - POST /api/article/import: Imports articles for specified researchers
+ *
+ * Base URL: /api/article
+ *
+ * @author Jorge Armando Avila Carrillo | NAOID: 3310
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/api/article")
 @RequiredArgsConstructor
@@ -21,12 +35,16 @@ public class ArticleController {
     private final ArticleService articleService;
 
     /**
-     * GET - obtain all the articles that are stored in the database
-     * GET http://localhost:8080/api/article/articles
+     * Retrieves all articles stored in the database.
+     *
+     * Endpoint: GET /api/article/articles
+     * Example: GET http://localhost:8080/api/article/articles
+     *
+     * @return ResponseEntity<List<Article>> - HTTP 200 OK with list of all articles
      */
     @GetMapping("/articles")
     public ResponseEntity<List<Article>> getAllArticles() {
-        log.info("GET /api/scholar/articles - Requesting all articles");
+        log.info("GET /api/article/articles - Requesting all articles");
 
         List<Article> articles = articleService.getAllArticles();
 
@@ -35,13 +53,24 @@ public class ArticleController {
     }
 
     /**
-     * POST - Import articles and stored in the DB
-     * POST http://localhost:8080/api/article/import
-     * Body: {
+     * Imports articles for specified researchers and stores them in the database.
+     *
+     * Endpoint: POST /api/article/import
+     * Example: POST http://localhost:8080/api/article/import
+     *
+     * Request Body example:
+     * {
      *   "researchers": ["Andrew Ng", "Geoffrey Hinton"],
      *   "articlesPerResearcher": 3
      * }
-     * You can use CURL to try this
+     *
+     * CURL example:
+     * curl -X POST http://localhost:8080/api/article/import \
+     *   -H "Content-Type: application/json" \
+     *   -d '{"researchers":["Andrew Ng"],"articlesPerResearcher":3}'
+     *
+     * @param request ImportRequestDTO - Contains list of researcher names and articles per researcher
+     * @return ResponseEntity<ImportResponseDTO> - HTTP 201 CREATED with import summary and article list
      */
     @PostMapping("/import")
     public ResponseEntity<ImportResponseDTO> importArticles(@RequestBody ImportRequestDTO request) {
@@ -49,13 +78,13 @@ public class ArticleController {
         log.info("Investigators: {}", request.getResearchers());
         log.info("Articles per investigator: {}", request.getArticlesPerResearcher());
 
-        // Import and obtain the articles
+        // Import and obtain the articles from external API
         List<Article> savedArticles = articleService.importArticlesForResearchers(
                 request.getResearchers(),
                 request.getArticlesPerResearcher()
         );
 
-        // Build the response
+        // Build the response DTO with importation summary
         ImportResponseDTO response = ImportResponseDTO.builder()
                 .status("success")
                 .message("Articles imported successfully")
