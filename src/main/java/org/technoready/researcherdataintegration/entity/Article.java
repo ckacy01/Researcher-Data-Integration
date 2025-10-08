@@ -5,15 +5,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * This class stores the articles attributes for sprint 3.
- * DATE: 06 - October - 2025
+ * DATE: 07 - October - 2025
  *
  * @author Jorge Armando Avila Carrillo | NAOID: 3310
- * @version 1.0
+ * @version 2.0
  */
 
 @Entity
@@ -23,28 +26,36 @@ import java.util.Date;
 @AllArgsConstructor
 public class Article {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id", length = 255)
     private String id;
 
-    @Column(name = "title")
+    @Column(name = "title", columnDefinition = "TEXT")
     private String title;
 
-    @Column(name = "authors")
+    @Column(name = "authors", columnDefinition = "TEXT")
     private String authors;
 
-    @Column (name = "publication_date")
-    private Date publication_date;
+    @Column(name = "publication_date")
+    private LocalDate publicationDate;
 
-    @Column (name = "abstract")
-    private String _abstract;
+    @Column(name = "abstract", columnDefinition = "TEXT")
+    private String abstractText;
 
-    @Column (name = "link")
+    @Column(name = "link", columnDefinition = "TEXT")
     private String link;
 
-    @Column (name = "keywords")
+    @Column(name = "keywords", columnDefinition = "TEXT")
     private String keywords;
 
-    @Column (name = "cited_by")
-    private long cited_by;
+    @Column(name = "cited_by")
+    private Integer citedBy;
+
+    @Column(name = "researcher_name", length = 255)
+    private String researcherName;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
 }
