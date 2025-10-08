@@ -16,6 +16,8 @@ import org.technoready.researcherdataintegration.exception.DatabaseException;
 import org.technoready.researcherdataintegration.exception.ValidationException;
 import org.technoready.researcherdataintegration.repository.ArticleRepository;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +57,9 @@ public class ArticleService {
                 log.info("Processing researcher: {}", researcher);
                 List<Article> savedArticles = processResearcher(researcher, articlesPerResearcher);
                 allSavedArticles.addAll(savedArticles);
-                log.info("✓ {} articles saved for: {}", savedArticles.size(), researcher);
+                log.info("{} articles saved for: {}", savedArticles.size(), researcher);
             } catch (Exception e) {
-                log.error("✗ Error processing {}: {}", researcher, e.getMessage(), e);
+                log.error("Error processing {}: {}", researcher, e.getMessage(), e);
                 throw new ApiKeyException("Error processing researcher " + researcher + ": " + e.getMessage());
             }
         }
@@ -99,15 +101,10 @@ public class ArticleService {
     private String callSerpApi(String researcherName, int maxResults) {
         String apiKey = scholarApiConfiguration.getApiKey();
         String baseUrl = scholarApiConfiguration.getBaseUrl();
-
-        if (apiKey == null || apiKey.equals("tu_serpapi_key")) {
-            throw new ValidationException("SerpAPI key not configured");
-        }
-
         String url = String.format(
-                "%s?engine=google_scholar&q=author:%%22%s%%22&api_key=%s&num=%d",
+                "%s?engine=google_scholar&q=author:%s&api_key=%s&num=%d",
                 baseUrl,
-                researcherName.replace(" ", "+"),
+                URLEncoder.encode( researcherName, StandardCharsets.UTF_8),
                 apiKey,
                 maxResults
         );
@@ -156,12 +153,12 @@ public class ArticleService {
                         .id(result.getResultId())
                         .title(extractTitle(result))
                         .authors(extractAuthors(result))
-                        .publication_date(extractPublicationDate(result))
-                        ._abstract(extractAbstract(result))
+                        .publicationDate(extractPublicationDate(result))
+                        .abstractText(extractAbstract(result))
                         .link(extractLink(result))
                         .keywords(extractKeywords(result))
-                        .cited_by(extractCitedBy(result))
-                        .authors(researcherName)
+                        .citedBy(extractCitedBy(result))
+                        .researcherName(researcherName)
                         .build();
 
                 articles.add(article);
@@ -182,7 +179,7 @@ public class ArticleService {
 
         try {
             for (Article article : articles) {
-                if (!articleRepository.existsByAuthors(article.getId(), researcherName)) {
+                if (!articleRepository.existsByIdAndResearcherName(article.getId(), researcherName)) {
                     Article saved = articleRepository.save(article);
                     savedArticles.add(saved);
                     log.info("Saved: {}", article.getTitle());
